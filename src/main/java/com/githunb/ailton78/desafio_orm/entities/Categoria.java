@@ -1,9 +1,9 @@
 package com.githunb.ailton78.desafio_orm.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Categoria {
@@ -12,6 +12,9 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String descricao;
+
+    @OneToMany(mappedBy = "categoria")
+    private Set<Atividade> atividades = new HashSet<>();
 
     public Categoria(){}
 
@@ -34,5 +37,9 @@ public class Categoria {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public Set<Atividade> getAtividades() {
+        return atividades;
     }
 }
